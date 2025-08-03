@@ -1,0 +1,68 @@
+{
+  "start": {
+    "type": "single",
+    "question": "性別？",
+    "choices": {
+      "男性": "q2",
+      "女性": "q2"
+    }
+  },
+  "q2": {
+    "type": "single",
+    "question": "内科疾患の情報がある?(カルテ記載,情報提供書など)",
+    "choices": {
+      "ある": "q3",
+      "ない": "comment内科疾患の情報を確認する|q4"
+    }
+  },
+  "q3": {
+    "type": "multiple",
+    "question": "内科の併存疾患は?（複数選択可）",
+    "choices": {
+      "高血圧症": "commentパン派ですね。",
+      "慢性心不全": "comment和食派ですね。",
+      "不整脈": "commentヘルシー志向ですね。",
+      "糖尿病": "commentヘルシー志向ですね。",
+      "脂質異常症": "commentヘルシー志向ですね。",
+      "慢性腎臓病(慢性腎障害)": "commentヘルシー志向ですね。"
+    },
+    "next": "q4"
+  },
+  "q4": {
+    "type": "single",
+    "question": "常用薬の情報がある?(院内処方,持参薬剤情報など)",
+    "choices": {
+      "ある": "result",
+      "ない": "comment常用薬の情報を確認|result"
+    }
+  },  
+  "q3x": {
+    "type": "single",
+    "question": "運動はしますか？",
+    "choices": {
+      "する": "q4",
+      "しない": "comment運動は苦手なんですね。|q4"
+    }
+  },
+  "q4x": {
+    "type": "multiple",
+    "question": "どんな運動が好きですか？（複数選択可）",
+    "choices": {
+      "ランニング": "commentランニング好き！",
+      "水泳": "comment水の中が得意ですね！",
+      "ヨガ": "comment落ち着きたいタイプですね。"
+    },
+    "next": "result"
+  },
+    "qx": {
+    "type": "single",
+    "question": "性別？",
+    "choices": {
+      "男性": "q2",
+      "女性": "comment朝ごはん抜きなんですね。|q3"
+    }
+  },
+  "result": {
+    "result": "診断結果はこちらです："
+  }
+}
