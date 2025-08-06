@@ -36,9 +36,9 @@ git commit -m "initial commit"
 
 # Heroku デプロイ（初回）
 heroku login
-heroku create grocery2025
+heroku create ※※
 git push heroku master
-※最近はmainがいい
+※最近はmasterよりmainがいい
 
 #エラーログ取得
 heroku logs --tail
@@ -48,6 +48,9 @@ git add .
 git commit -m "Fix: バグ修正"
 git push heroku main     # Heroku の Web に反映
 git push origin main     # GitHub にソースを保存
+
+#確認
+git status
 
 #DB変更後の修正反映が必要
 heroku run python init_db.py
