@@ -3,36 +3,60 @@
 <head>
     <meta charset="utf-8">
     <title>質問</title>
+    <style>
+        .options {
+            display: flex;
+            gap: 15px;  /* 選択肢を横並びに */
+        }
+        .question-block {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <h2>{{ question }}</h2>
 
-    <form action="{{ url_for('answer') }}" method="post" style="display:inline-block; margin-right:10px;">
+    <form action="{{ url_for('question', node_id=node_id) }}" method="post">
         <input type="hidden" name="node_id" value="{{ node_id }}">
         <input type="hidden" name="qtype" value="{{ qtype }}">
-        <input type="hidden" name="next_node" value="{{ next_node }}">
 
         {% if qtype == 'single' %}
-            {% for label, value in choices.items() %}
+            {% for label, data in choices.items() %}
                 <label>
-                    <input type="radio" name="choice" value="{{ value }}" required> {{ label }}
+                    <input type="radio" name="answer" value="{{ label }}" required> {{ label }}
                 </label><br>
             {% endfor %}
 
         {% elif qtype == 'multiple' %}
-            {% for label, value in choices.items() %}
+            {% for label, data in choices.items() %}
                 <label>
-                    <input type="checkbox" name="choices" value="{{ value }}"> {{ label }}
+                    <input type="checkbox" name="answer" value="{{ label }}"> {{ label }}
                 </label><br>
             {% endfor %}
 
+        {% elif qtype == 'multi_single' %}
+            {% for sub_id, subq in subquestions.items() %}
+                <div class="question-block">
+                    <p>{{ subq.question }}</p>
+                    <div class="options">
+                        {% for label, data in subq.choices.items() %}
+                            <label>
+                                <input type="radio" name="{{ sub_id }}" value="{{ label }}" required>
+                                {{ label }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+
         {% else %}
-            <p>未知の質問タイプです。</p>
+            <p>エラー(未知の質問タイプ)</p>
         {% endif %}
 
         <br>
         <button type="submit">次に進む</button>
     </form>
+
     <form action="{{ url_for('index') }}" method="get" style="display:inline-block;">
         <br>
         <button type="submit">最初に戻る</button>

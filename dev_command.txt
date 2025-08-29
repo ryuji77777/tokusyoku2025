@@ -52,5 +52,12 @@ git push origin main     # GitHub にソースを保存
 #確認
 git status
 
+#→ Git に管理されている（コミット対象になっている）ファイル一覧
+git ls-files
+
+
+#appのURLなどをみる
+heroku apps:info
+
 #DB変更後の修正反映が必要
 heroku run python init_db.py
