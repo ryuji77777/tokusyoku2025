@@ -35,7 +35,7 @@
         "risk": 1
       },
       "慢性心不全": {
-        "comment": "心臓食を検討(理由:心疾患の併存あり)",
+        "meal": "心臓食を検討(理由:心疾患の併存あり)",
         "next": "q4",
         "risk": 1
       },
@@ -44,17 +44,17 @@
         "risk": 1
       },
       "糖尿病": {
-        "comment": "糖尿病食を検討(理由:糖尿病の併存あり)",
+        "meal": "糖尿病食を検討(理由:糖尿病の併存あり)",
         "next": "q4",
         "risk": 1
       },
       "脂質異常症": {
-        "comment": "脂質異常食を検討(理由:脂質異常症の併存あり)",
+        "meal": "脂質異常食を検討(理由:脂質異常症の併存あり)",
         "next": "q4",
         "risk": 1
       },
       "慢性腎臓病(慢性腎障害)": {
-        "comment": "腎臓食を検討(理由:腎臓病の併存あり)",
+        "meal": "腎臓食を検討(理由:腎臓病の併存あり)",
         "next": "q4",
         "risk": 1
       },
@@ -99,17 +99,17 @@
         "risk": 1
       },
       "血糖降下薬(糖尿病治療薬：インスリン、)": {
-        "comment": "糖尿病食を検討(理由:糖尿病の治療薬あり)",
+        "meal": "糖尿病食を検討(理由:糖尿病の治療薬あり)",
         "next": "result",
         "risk": 1
       },
       "脂質異常症治療薬()": {
-        "comment": "脂質異常食を検討(理由:脂質異常症の治療薬あり)",
+        "meal": "脂質異常食を検討(理由:脂質異常症の治療薬あり)",
         "next": "result",
         "risk": 1
       },
       "腎臓病薬()": {
-        "comment": "腎臓食を検討(理由:腎臓病の治療薬あり)",
+        "meal": "腎臓食を検討(理由:腎臓病の治療薬あり)",
         "next": "result",
         "risk": 1
       },
@@ -138,79 +138,144 @@
   },
 
   "q7": {
-  "type": "multi_single",
-  "question": "血液検査結果は?",
-  "subquestions": {
-    "q7a": {
-      "question": "Hb(g/dL)",
-      "choices": {
-        "<10": {
-          "comment": "貧血",
-          "next": "result"
-        },
-        "≧10": {
-          "next": "result"
-        },
-        "結果なし": {
-          "comment": "血液検査でHbを確認",
-          "next": "result"
+    "type": "multi_single",
+    "question": "血液検査結果は?(1/2ページ)",
+    "subquestions": {
+      "q7a": {
+        "question": "Hb(g/dL)",
+        "choices": {
+          "<10": {
+            "meal": "貧血食を検討(理由:血液検査でHb低値)",
+            "next": "result"
+          },
+          "≧10": {
+            "next": "q8"
+          },
+          "結果なし": {
+            "comment": "血液検査でHbを確認",
+            "next": "q8"
+          }
         }
-      }
-    },
-    "q7b": {
-      "question": "TG(mg/dL)？",
-      "choices": {
-        "慢性心不全１": {
-          "comment": "心臓食を検討 (軽度)",
-          "next": "result",
-          "risk": 1
-        },
-        "慢性心不全２": {
-          "comment": "心臓食を検討 (中等度)",
-          "next": "result",
-          "risk": 1
+      },
+      "q7b": {
+        "question": "HbA1c(%)",
+        "choices": {
+          "<6.0": {
+            "next": "q8"
+          },
+          "≧6.0": {
+            "meal": "糖尿病食を検討(理由:血液検査でHbA1c高値)",
+            "next": "result"
+          },
+          "結果なし": {
+            "comment": "血液検査でHbA1cを確認",
+            "next": "q8"
+          }
         }
-      }
-    }
-  }
-},
-
-  "q7old": {
-    "type": "multiple",
-    "question": "★血液検査結果は?（複数選択可）",
-    "choices": {
-      "高血圧症": {
-        "comment": "心血管リスク",
-        "next": "result",
-        "risk": 1
       },
-      "慢性心不全": {
-        "comment": "心臓食を検討(理由:心疾患の併存あり)",
-        "next": "result",
-        "risk": 1
+      "q7c": {
+        "question": "TG(mg/mL)",
+        "choices": {
+          "<150": {
+            "next": "q8"
+          },
+          "≧150": {
+            "meal": "脂質異常症食を検討(理由:血液検査でTG高値)",
+            "next": "result"
+          },
+          "結果なし": {
+            "comment": "血液検査でTGを確認",
+            "next": "q8"
+          }
+        }
       },
-      "不整脈": {
-        "comment": "心血管リスク",
-        "next": "result",
-        "risk": 1
+      "q7d": {
+        "question": "LDLコレステロール(mg/mL)",
+        "choices": {
+          "<140": {
+            "next": "q8"
+          },
+          "≧140": {
+            "meal": "脂質異常症食を検討(理由:血液検査でLDLコレステロール高値)",
+            "next": "result"
+          },
+          "結果なし": {
+            "comment": "血液検査でLDLコレステロールを確認",
+            "next": "q8"
+          }
+        }
       },
-      "糖尿病": {
-        "comment": "糖尿病食を検討(理由:糖尿病の併存あり)",
-        "next": "result",
-        "risk": 1
+      "q7e": {
+        "question": "HDLコレステロール(mg/mL)",
+        "choices": {
+          "≦40": {
+            "meal": "脂質異常症食を検討(理由:血液検査でHDLコレステロール低値)",
+            "next": "result"
+          },
+          ">40": {
+            "next": "q8"
+          },
+          "結果なし": {
+            "next": "q8"
+          }
+        }
       },
-      "脂質異常症": {
-        "comment": "脂質異常食を検討(理由:脂質異常症の併存あり)",
-        "next": "result",
-        "risk": 1
-      },
-      "慢性腎臓病(慢性腎障害)": {
-        "comment": "腎臓食を検討(理由:腎臓病の併存あり)",
-        "next": "result",
-        "risk": 1
+      "q7f": {
+        "question": "UA(mg/mL)",
+        "choices": {
+          "≦7.0": {
+            "next": "q8"
+          },
+          ">7.0": {
+            "meal": "痛風食を検討(理由:血液検査でUA高値)",
+            "next": "result"
+          },
+          "結果なし": {
+            "comment": "血液検査でUAを確認",
+            "next": "q8"
+          }
+        }
       }
     }
   },
+
+  "q8": {
+    "type": "multi_single",
+    "question": "血液検査結果は?(2/2ページ)",
+    "subquestions": {
+      "q8a": {
+        "question": "BNP(pg/mL)",
+        "choices": {
+          "<40": {
+            "next": "result"
+          },
+          "≧40": {
+            "next": "result",
+            "risk": 1
+          },
+          "結果なし": {
+            "next": "result"
+          }
+        }
+      },
+      "q8b": {
+        "question": "NT-proBNP(pg/mL)",
+        "choices": {
+          "<125": {
+            "next": "result"
+          },
+          "≧125": {
+            "next": "result",
+            "risk": 1
+          },
+          "結果なし": {
+            "next": "result"
+          }
+        }
+      }
+    }
+  },
+
   "result": {
     "result": "結果"
   }

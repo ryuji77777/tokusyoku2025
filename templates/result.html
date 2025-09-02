@@ -5,12 +5,23 @@
     <title>結果</title>
 </head>
 <body>
-    <h3>コメント(推奨を元に担当医と相談してください)：</h3>
-    <ul>
-        {% for comment in comments %}
-            <li>{{ comment }}</li>
-        {% endfor %}
-    </ul>
+    {% if meals %}
+        <h2>食事の推奨(担当医と相談してください)：</h2>
+        <ul>
+            {% for meal in meals %}
+                <li>{{ meal }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if comments %}
+        <h3>補足コメント：</h3>
+        <ul>
+            {% for comment in comments %}
+                <li>{{ comment }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
     <a href="{{ url_for('index') }}">次の患者</a>
 </body>

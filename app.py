@@ -14,6 +14,7 @@ def index():
     session['merged_data'] = {
         "next": "start",
         "comments": [],
+        "meal": [],
         "risk_score": 0
     }
     return redirect(url_for('question', node_id='start'))
@@ -53,6 +54,8 @@ def question(node_id):
         for c in selected_choices:
             if c.get('comment'):
                 merged_data['comments'].append(c['comment'])
+            if c.get('meal'):
+                merged_data['meal'].append(c['meal'])
             merged_data['risk_score'] += c.get('risk', 0)
 
         # 次のノード決定
@@ -78,18 +81,20 @@ def question(node_id):
     })
 
     if 'result' in node or merged_data.get('next') == 'result':
-        comments = merged_data.get('comments', []).copy()  # コピーして編集
+        comments = merged_data.get('comments', []).copy()
+        meals = merged_data.get('meal', []).copy()
 
-        # risk_score が 0 より大きければ "心エコー" を追加
+        # risk_score > 0 の場合はコメントを追加
         if merged_data.get('risk_score', 0) > 0:
             comments.append("心エコーなどの結果で心臓食を検討(理由:心血管リスクあり)")
 
-        # コメントが空なら "常食を継続"
-        if not comments:
-            comments.append("一般食を継続、または内科医に相談")
+        # 特食なしでコメントが空なら一般食推奨
+        if not meals and not comments:
+            meals = ["一般食を継続、または内科医に相談"]   # comment?
 
         return render_template(
             'result.html',
+            meals=meals,
             comments=comments
         )
 
