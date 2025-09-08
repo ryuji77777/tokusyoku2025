@@ -69,7 +69,7 @@ def question(node_id):
 
         merged_data['next'] = 'result' if go_result else next_node or node_id
 
-        print("DEBUG merged_data:", merged_data)
+        # 開発用 print("DEBUG merged_data:", merged_data)
         session['merged_data'] = merged_data
         return redirect(url_for('question', node_id=merged_data['next']))
 
@@ -86,7 +86,8 @@ def question(node_id):
 
         # risk_score > 0 の場合はコメントを追加
         if merged_data.get('risk_score', 0) > 0:
-            comments.append("心エコーなどの結果で心臓食を検討(理由:心血管リスクあり)")
+            comments.append("心血管リスクあり、心エコーなどの検査を検討")
+            comments.append("検査で心不全所見があれば心臓食を検討")
 
         # 特食なしでコメントが空なら一般食推奨
         if not meals and not comments:

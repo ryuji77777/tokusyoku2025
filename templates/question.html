@@ -11,6 +11,11 @@
         .question-block {
             margin-bottom: 20px;
         }
+        span.info-icon {
+            cursor: pointer;
+            margin-left: 5px;
+            color: #007BFF; /* 青色で目立たせる */
+        }
     </style>
 </head>
 <body>
@@ -23,14 +28,19 @@
         {% if qtype == 'single' %}
             {% for label, data in choices.items() %}
                 <label>
-                    <input type="radio" name="answer" value="{{ label }}" required> {{ label }}
+                    <input type="radio" name="answer" value="{{ label }}" required>
+                    {{ label }}
                 </label><br>
             {% endfor %}
 
         {% elif qtype == 'multiple' %}
             {% for label, data in choices.items() %}
                 <label>
-                    <input type="checkbox" name="answer" value="{{ label }}"> {{ label }}
+                    <input type="checkbox" name="answer" value="{{ label }}">
+                    {{ label }}
+                    {% if data.tooltip %}
+                        <span class="info-icon" onclick="alert('{{ data.tooltip }}')">ℹ️</span>
+                    {% endif %}
                 </label><br>
             {% endfor %}
 
