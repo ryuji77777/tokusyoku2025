@@ -69,8 +69,10 @@ def question(node_id):
 
         merged_data['next'] = 'result' if go_result else next_node or node_id
 
-        # 開発用 print("DEBUG merged_data:", merged_data)
+        # 開発用 print("DEBUG merged_data:", merged_data)とcookie
         session['merged_data'] = merged_data
+        print('merged_data', merged_data)
+        print("DEBUG session size:", len(json.dumps(session.get('merged_data', {}))))
         return redirect(url_for('question', node_id=merged_data['next']))
 
     # GET: 質問表示
