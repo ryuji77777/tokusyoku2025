@@ -46,9 +46,9 @@ heroku logs --tail
 #両方反映するためのコマンド
 git add .
 git commit -m "Fix: バグ修正"
-git push heroku main     
+git push heroku master   
     # Heroku の Web に反映
-git push origin main     
+git push origin master
     # GitHub にソースを保存
 
 #確認
