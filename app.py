@@ -29,8 +29,10 @@ def question(node_id):
         merged_data = session.get('merged_data', {
             "next": node_id,
             "comments": [],
+            "meal": [],    
             "risk_score": 0
         })
+
         qtype = node.get('type', 'single')
         selected_choices = []
 
@@ -57,6 +59,14 @@ def question(node_id):
             if c.get('meal'):
                 merged_data['meal'].append(c['meal'])
             merged_data['risk_score'] += c.get('risk', 0)
+        for c in selected_choices:
+            # 修正済
+            if 'comment' in c:
+                merged_data['comments'].append(c['comment'])
+            if 'meal' in c:
+                merged_data['meal'].append(c['meal'])
+            if 'risk' in c:
+                merged_data['risk_score'] += c['risk']
 
         # 次のノード決定
         next_node = None
