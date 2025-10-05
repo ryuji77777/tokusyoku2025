@@ -29,7 +29,7 @@ def question(node_id):
         merged_data = session.get('merged_data', {
             "next": node_id,
             "comments": [],
-            "meal": [],    
+            "meal": [],
             "risk_score": 0
         })
 
