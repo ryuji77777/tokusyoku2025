@@ -54,13 +54,6 @@ def question(node_id):
 
         # コメントとリスクスコアを更新
         for c in selected_choices:
-            if c.get('comment'):
-                merged_data['comments'].append(c['comment'])
-            if c.get('meal'):
-                merged_data['meal'].append(c['meal'])
-            merged_data['risk_score'] += c.get('risk', 0)
-        for c in selected_choices:
-            # 修正済
             if 'comment' in c:
                 merged_data['comments'].append(c['comment'])
             if 'meal' in c:
@@ -82,13 +75,15 @@ def question(node_id):
         # セッション保存
         session['merged_data'] = merged_data
 
-        # 開発用 print("DEBUG merged_data:", merged_data)とcookie
-        print('merged_data', merged_data)
-        print("DEBUG session size:", len(json.dumps(session.get('merged_data', {}))))
+        # 開発用 merged_dataとcookieをprint
+        if app.debug:
+            print('merged_data', merged_data)
+            print("DEBUG session size:", len(json.dumps(session.get('merged_data', {}))))
 
         return redirect(url_for('question', node_id=merged_data['next']))
 
     # GET: 質問表示
+    # ここは保険として残しておいた方が安全
     merged_data = session.get('merged_data', {
         "next": node_id,
         "comments": [],
